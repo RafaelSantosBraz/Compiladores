@@ -13,5 +13,6 @@ int main()
     numero[0].atual = 0;
     numero[0].prox = 1;
     numero[0].simbolo = '0';
+    
     return 0;
 }
