@@ -59,7 +59,7 @@ void match(int type){
 }
 
 int main(){
-    input = "12.36 + 2";
+    input = "12.36-321+111";
     lookahead = next_token();
     list();
 }

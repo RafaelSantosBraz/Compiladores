@@ -97,7 +97,7 @@ token next_token()
             double factor = 1.0;
             do
             {
-                r *= factor;
+                //r *= factor;
                 factor /= 10.0;
                 r += atoi(&peek) * factor;
                 peek = get_char();
