@@ -71,7 +71,7 @@ token next_token()
         c = EOF;
     }
     //ignorar espaços e tabulações
-    while (peek = get_char())
+    do
     {
         if (peek == ' ' || peek == '\t')
             continue;
@@ -79,7 +79,7 @@ token next_token()
             current_line++;
         else
             break;
-    }
+    } while (peek = get_char());
     // identificação de inteiros e reais
     if (isdigit(peek))
     {
@@ -93,6 +93,7 @@ token next_token()
         // continuação como real
         if (peek == '.')
         {
+            peek = get_char();
             double factor = 1.0;
             do
             {

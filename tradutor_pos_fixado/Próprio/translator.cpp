@@ -18,8 +18,8 @@ void print_char(char c){
     printf("%c ", c);
 }
 
-void print_int(int i){
-    printf("%d ", i);
+void print_number(double i){
+    printf("%f ", i);
 }
 
 void list(){
@@ -41,11 +41,8 @@ void x(){
 }
 
 void term(){
-    // if (isalpha(lookahead)){ //var
-    //     match(lookahead);
-    // } else
     if (lookahead.type == NUM) {
-        print_int(lookahead.value);
+        print_number(lookahead.value);
         match(NUM);
     } else {
         printf("Syntax error on term\n");
@@ -62,7 +59,7 @@ void match(int type){
 }
 
 int main(){
-    input = "123-321+111";
+    input = "12.36 + 2";
     lookahead = next_token();
     list();
 }
