@@ -101,7 +101,7 @@ void rest()
 }
 
 void match(int type) {
-    //cout << token_name(lookahead.type) << endl;
+    cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == type) {
 		lookahead = next_token();
 	}

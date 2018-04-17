@@ -145,8 +145,8 @@ token next_token()
 	return t;
 }
 
-int teste() {
-    input = "print 2+2;";
+int t() {
+    input = "print 2+2; x=3+2;";
     token lookahead = next_token();
     while (lookahead.type!=EOF)
 	{
