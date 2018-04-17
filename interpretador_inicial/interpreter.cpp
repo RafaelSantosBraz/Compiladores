@@ -42,6 +42,7 @@ void loop()
 	else
 	{
 		// terminou
+		//printf("Complete!\n");
 	}
 }
 
@@ -58,6 +59,8 @@ void cmd()
 	else
 	{
 		// erro
+		printf("Syntax Error <cmd>!\n");
+        exit(1);
 	}
 }
 
@@ -74,6 +77,8 @@ void expr()
 	else
 	{
 		// erro
+        printf("Syntax Error <expr>!\n");
+        exit(1);
 	}
 }
 
@@ -90,6 +95,8 @@ void rest()
 	else
 	{
 		// erro
+		printf("Syntax Error <rest>!\n");
+        exit(1);
 	}
 }
 
@@ -103,7 +110,7 @@ void match(int type) {
 }
 
 int main() {
-	input = "print 2+2;";
+	input = "print 2++2;";
 	lookahead = next_token();
 	prog();
 	return 0;

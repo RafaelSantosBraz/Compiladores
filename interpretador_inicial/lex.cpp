@@ -1,7 +1,7 @@
-#include "cstdio"
-#include "string"
-#include "iostream"
-#include "cstdlib"
+#include <cstdio>
+#include <string>
+#include <iostream>
+#include <cstdlib>
 
 // constantes para types dos tokens
 #define NUM 256
@@ -29,6 +29,26 @@ int pos = 0;
 char c = EOF;
 // contagem da linha atual
 int current_line = 0;
+
+string token_name(int t)
+{
+    switch (t)
+    {
+    case NUM:
+        return "NUM";
+    case PLUS:
+        return "PLUS";
+    case VAR:
+        return "VAR";
+	case EQ:
+        return "EQ";
+	case PRINT:
+        return "PRINT";
+	case EOL:
+        return "EOL";
+    }
+    return "ERROR";
+}
 
 // faz a leitura de um char em input
 char get_char()
@@ -123,4 +143,18 @@ token next_token()
 		t.type = ERR;
 	}
 	return t;
+}
+
+int teste() {
+    input = "print 2+2;";
+    token lookahead = next_token();
+    while (lookahead.type!=EOF)
+	{
+        cout << "<"<< token_name(lookahead.type);
+        if (lookahead.type == NUM)
+            cout << "," << lookahead.value;
+        cout <<">"<< endl;
+        lookahead = next_token();
+    }
+	return 0;
 }
