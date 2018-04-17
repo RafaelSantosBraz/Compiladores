@@ -98,7 +98,7 @@ token next_token()
 		else
 		{
 			t.type = VAR;
-			t.value = 0;// tabela de símbolos
+			t.value = 0; // tabela de símbolos
 		}
 		c = peek;
 	}
