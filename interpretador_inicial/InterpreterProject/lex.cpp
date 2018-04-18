@@ -1,35 +1,4 @@
-#include <cstdio>
-#include <string>
-#include <iostream>
-#include <cstdlib>
-#include "symbol_table.cpp"
-
-// constantes para types dos tokens
-#define NUM 256
-#define PLUS 257
-#define VAR 258
-#define EQ 259
-#define PRINT 260
-#define EOL 261
-#define ERR 8000
-
-using namespace std;
-
-// estrutura de representaÃ§Ã£o dos Tokens
-struct token
-{
-	int type;
-	int value;
-};
-
-// entrada para o Lex
-string input;
-// posiÃ§Ã£o atual (char) em input
-int pos = 0;
-// char auxiliar para "manter" o Ãºltimo sÃ­mbolo
-char c = EOF;
-// contagem da linha atual
-int current_line = 0;
+#include "lex.hpp"
 
 string token_name(int t)
 {
@@ -64,12 +33,12 @@ char get_char()
 	}
 }
 
-// faz a identificaÃ§Ã£o do prÃ³ximo Token na input e o retorna
+// faz a identificação do próximo Token na input e o retorna
 token next_token()
 {
 	token t;
 	char peek;
-	// manter o Ãºltimo sÃ­mbolo ou requisitar um novo
+	// manter o último símbolo ou requisitar um novo
 	if (c == EOF)
 	{
 		peek = get_char();
@@ -79,7 +48,7 @@ token next_token()
 		peek = c;
 		c = EOF;
 	}
-	//ignorar espaÃ§os e tabulaÃ§Ãµes
+	//ignorar espaços e tabulações
 	do
 	{
 		if (peek == ' ' || peek == '\t')
@@ -89,7 +58,7 @@ token next_token()
 		else
 			break;
 	} while (peek = get_char());
-	// identificaÃ§Ã£o de inteiros
+	// identificação de inteiros
 	if (isdigit(peek))
 	{
 		int v = 0;
@@ -103,7 +72,7 @@ token next_token()
 		t.value = v;
 		c = peek;
 	}
-	// identificaÃ§Ã£o de palavras
+	// identificação de palavras
 	else if (isalpha(peek))
 	{
 		string aux = "";
@@ -154,7 +123,7 @@ token next_token()
 	return t;
 }
 
-// funÃ§Ã£o de teste para lexer
+// função de teste para lexer
 int teste() {
     input = "x=2;";
     token lookahead = next_token();

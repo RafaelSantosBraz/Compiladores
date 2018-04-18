@@ -51,6 +51,7 @@ void cmd()
 	if (lookahead.type == VAR)
 	{
 		match(VAR); match(EQ); value_insertion(lookahead.value, expr()); /*match(EOL);*/
+		printf("Var %d %d", lookahead.value, get_value(lookahead.value));
 	}
 	else if (lookahead.type == PRINT)
 	{
@@ -111,7 +112,7 @@ void match(int type) {
 }
 
 int main() {
-	input = "x=2;";
+	input = "print 2+2;";
 	lookahead = next_token();
 	prog();
 	return 0;

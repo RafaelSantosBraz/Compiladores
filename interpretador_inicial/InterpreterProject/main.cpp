@@ -1,8 +1,4 @@
-#include <cstdio>
-#include <iostream>
-#include <cctype>
-#include <cstdlib>
-#include "lex.cpp"
+#include "lex.hpp"
 
 using namespace std;
 
@@ -11,15 +7,15 @@ void print_number(int);
 void prog();
 void loop();
 void cmd();
-void expr();
-void rest();
+int expr();
+int rest();
 void match(int);
 
 token lookahead;
 
-void print_char(char c)
+void print_char(char cs)
 {
-	printf("%c ", c);
+	printf("%c ", cs);
 }
 
 void print_number(int i)
@@ -50,11 +46,12 @@ void cmd()
 {
 	if (lookahead.type == VAR)
 	{
-		match(VAR); match(EQ); expr(); //match(EOL);
+		match(VAR); match(EQ); value_insertion(lookahead.value, expr()); /*match(EOL);*/
+		printf("Var %d %d", lookahead.value, get_value(lookahead.value));
 	}
 	else if (lookahead.type == PRINT)
 	{
-		match(PRINT); expr();
+		match(PRINT); cout << expr() << endl;
 	}
 	else
 	{
@@ -64,15 +61,15 @@ void cmd()
 	}
 }
 
-void expr()
+int expr()
 {
 	if (lookahead.type == VAR)
 	{
-		match(VAR); rest();
+		match(VAR); return get_value(lookahead.value) + rest();
 	}
 	else if (lookahead.type == NUM)
 	{
-		match(NUM); rest();
+		match(NUM); return lookahead.value + rest();
 	}
 	else
 	{
@@ -82,15 +79,15 @@ void expr()
 	}
 }
 
-void rest()
+int rest()
 {
 	if (lookahead.type == PLUS)
 	{
-		match(PLUS); expr();
+		match(PLUS); return expr();
 	}
 	else if (lookahead.type == EOL)
 	{
-		match(EOL);
+		match(EOL); return 0;
 	}
 	else
 	{
@@ -101,7 +98,7 @@ void rest()
 }
 
 void match(int type) {
-    cout << token_name(lookahead.type) << endl;
+    //cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == type) {
 		lookahead = next_token();
 	}
@@ -111,7 +108,7 @@ void match(int type) {
 }
 
 int main() {
-	input = "x=2;";
+	input = "print 2+2;";
 	lookahead = next_token();
 	prog();
 	return 0;
