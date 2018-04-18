@@ -12,8 +12,8 @@ void print_number(int);
 void prog();
 void loop();
 void cmd();
-void expr();
-void rest();
+int expr();
+int rest();
 void match(int);
 
 token lookahead;
@@ -51,11 +51,11 @@ void cmd()
 {
 	if (lookahead.type == VAR)
 	{
-		match(VAR); match(EQ); expr(); //match(EOL);
+		match(VAR); match(EQ); value_insertion(lookahead.value, expr()); /*match(EOL);*/
 	}
 	else if (lookahead.type == PRINT)
 	{
-		match(PRINT); expr();
+		match(PRINT); cout << expr() << endl;
 	}
 	else
 	{
@@ -65,15 +65,15 @@ void cmd()
 	}
 }
 
-void expr()
+int expr()
 {
 	if (lookahead.type == VAR)
 	{
-		match(VAR); rest();
+		match(VAR); return get_value(lookahead.value) + rest();
 	}
 	else if (lookahead.type == NUM)
 	{
-		match(NUM); rest();
+		match(NUM); return lookahead.value + rest();
 	}
 	else
 	{
@@ -83,15 +83,15 @@ void expr()
 	}
 }
 
-void rest()
+int rest()
 {
 	if (lookahead.type == PLUS)
 	{
-		match(PLUS); expr();
+		match(PLUS); return expr();
 	}
 	else if (lookahead.type == EOL)
 	{
-		match(EOL);
+		match(EOL); return 0;
 	}
 	else
 	{
