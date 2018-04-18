@@ -156,7 +156,7 @@ token next_token()
 
 // função de teste para lexer
 int teste() {
-    input = "x=2;";
+    input = "x = 66+2+1; print x;";
     token lookahead = next_token();
     while (lookahead.type!=EOF)
 	{
