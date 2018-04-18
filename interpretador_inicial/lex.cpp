@@ -145,6 +145,7 @@ token next_token()
 	return t;
 }
 
+// função de teste para lexer
 int t() {
     input = "print 2+2; x=3+2;";
     token lookahead = next_token();

@@ -3,6 +3,7 @@
 #include <cctype>
 #include <cstdlib>
 #include "lex.cpp"
+#include "symbol_table.cpp"
 
 using namespace std;
 
