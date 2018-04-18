@@ -79,6 +79,19 @@ int get_value(int index)
     }
 }
 
+// retorna o valor de uma variável
+int get_index(string lexeme)
+{
+   for (int i = 0; i < symbols.size(); i++)
+    {
+        info aux = symbols[i];
+        if (aux.lexeme == lexeme)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 // função de teste
 int t()
 {

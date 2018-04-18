@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include "symbol_table.cpp"
 
 // constantes para types dos tokens
 #define NUM 256
@@ -118,7 +119,15 @@ token next_token()
 		else
 		{
 			t.type = VAR;
-			t.value = 0; // tabela de símbolos
+			int pos = key_insertion(aux);
+			if (pos != -1)
+            {
+                t.value = pos;
+            }
+            else
+            {
+                t.value = get_index(aux);
+            }
 		}
 		c = peek;
 	}
@@ -147,12 +156,12 @@ token next_token()
 
 // função de teste para lexer
 int t() {
-    input = "print 2+2; x=3+2;";
+    input = "x = yayaya + x;";
     token lookahead = next_token();
     while (lookahead.type!=EOF)
 	{
         cout << "<"<< token_name(lookahead.type);
-        if (lookahead.type == NUM)
+        if (lookahead.type == NUM || lookahead.type == VAR)
             cout << "," << lookahead.value;
         cout <<">"<< endl;
         lookahead = next_token();
