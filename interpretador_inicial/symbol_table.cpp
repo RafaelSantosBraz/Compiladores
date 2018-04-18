@@ -64,3 +64,29 @@ bool value_insertion(int index, int value)
         return false;
     }
 }
+
+// retorna o valor de uma variável
+int get_value(int index)
+{
+   if (index >= 0 && index < symbols.size())
+    {
+        info aux = symbols[index];
+        return aux.value;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+// função de teste
+int t()
+{
+    int aux;
+    cout << is_there("x") << endl;
+    aux = key_insertion("x");
+    cout << aux << endl;
+    cout << is_there("x") << endl;
+    cout << value_insertion(aux, 3) << endl;
+    cout << get_value(aux) << endl;
+}
