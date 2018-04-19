@@ -151,6 +151,10 @@ token next_token()
 	{
 		t.type = ERR;
 	}
+	/*if (t.type == VAR)
+	{
+		cout << t.type << " " << t.value << endl;
+	}*/
 	return t;
 }
 

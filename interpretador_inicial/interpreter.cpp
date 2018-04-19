@@ -54,7 +54,7 @@ void cmd()
 {
 	if (lookahead.type == VAR)
 	{
-		match(VAR); match(EQ); expr(); /*match(EOL);*/ cout << lookahead.value << " " << calculus << endl; value_insertion(lookahead.value, calculus); calculus = 0;
+		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << lookahead.value << " " << calculus << endl;*/ cout << "aaa" << calculus << endl; value_insertion(lookahead.value, calculus); calculus = 0;
 		//printf("Var %d %d", lookahead.value, get_value(lookahead.value));
 	}
 	else if (lookahead.type == PRINT)
@@ -113,17 +113,22 @@ void rest()
 
 void match(int type) {
     //cout << token_name(lookahead.type) << endl;
-	if (lookahead.type == type) {
+	if (lookahead.type == type)
+	{
 		lookahead = next_token();
 	}
-	else {
+	else
+	{
 		printf("Match error");
 	}
 }
 
-int main() {
+int main()
+{
 	input = "x = 66+2+1; print x;";
 	lookahead = next_token();
 	prog();
+	value_insertion(get_index("x"), 69);
+	cout << get_value(get_index("x")) << endl;
 	return 0;
 }
