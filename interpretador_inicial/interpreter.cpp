@@ -17,7 +17,7 @@ void match(int);
 
 token lookahead;
 
-// auxiliar do c�lculo de <expr>
+// auxiliares do c�lculo de <expr>
 int calculus = 0;
 int value_ant = 0;
 
@@ -46,18 +46,15 @@ void loop()
 	else
 	{
 		// terminou
-		//printf("Complete!\n");
 	}
 }
 
 void cmd()
 {
-	//cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == VAR)
 	{	
 		int var_reference = lookahead.value;	
-		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << var_reference << " " << calculus << endl;*/ value_insertion(var_reference, calculus); calculus = 0;
-		//printf("Var %d %d", lookahead.value, get_value(lookahead.value));
+		match(VAR); match(EQ); expr(); value_insertion(var_reference, calculus); calculus = 0;
 	}
 	else if (lookahead.type == PRINT)
 	{
@@ -75,16 +72,11 @@ void expr()
 {
 	if (lookahead.type == VAR)
 	{
-	    //int aux = (get_value(lookahead.value) + rest());
-	    //cout << aux << endl;
-		//cout << "endereço de get: " << lookahead.value << endl;
 	    value_ant = get_value(lookahead.value);
 		match(VAR); rest();
 	}
 	else if (lookahead.type == NUM)
 	{
-	    //int aux = (lookahead.value + rest());
-	    //cout << aux << endl;
 	    value_ant = lookahead.value;
 		match(NUM); rest();
 	}
@@ -116,7 +108,6 @@ void rest()
 
 void match(int type) 
 {
-    //cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == type)
 	{
 		lookahead = next_token();

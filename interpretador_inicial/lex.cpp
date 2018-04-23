@@ -30,8 +30,6 @@ int pos = 0;
 char c = EOF;
 // contagem da linha atual
 int current_line = 0;
-// auxiliar de refrência à variável
-//int var_reference;
 
 string token_name(int t)
 {
@@ -122,11 +120,9 @@ token next_token()
 		{
 			t.type = VAR;			
 			int pos = key_insertion(aux);
-			//cout << "var token: " << aux << " pos: " <<  pos << endl;
 			if (pos != -1)
             {
                 t.value = pos;
-				//var_reference = pos;
             }
             else
             {
@@ -155,10 +151,6 @@ token next_token()
 	{
 		t.type = ERR;
 	}
-	/*if (t.type == VAR)
-	{
-		cout << t.type << " " << t.value << endl;
-	}*/
 	return t;
 }
 
