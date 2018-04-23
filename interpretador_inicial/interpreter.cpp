@@ -52,10 +52,11 @@ void loop()
 
 void cmd()
 {
-	//cout << "tamanho tabela: " << symbols.size() << endl;
+	//cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == VAR)
-	{		
-		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << var_reference << " " << calculus << endl; */ value_insertion(var_reference, calculus); calculus = 0;
+	{	
+		int var_reference = lookahead.value;	
+		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << var_reference << " " << calculus << endl;*/ value_insertion(var_reference, calculus); calculus = 0;
 		//printf("Var %d %d", lookahead.value, get_value(lookahead.value));
 	}
 	else if (lookahead.type == PRINT)
@@ -113,7 +114,8 @@ void rest()
 	}
 }
 
-void match(int type) {
+void match(int type) 
+{
     //cout << token_name(lookahead.type) << endl;
 	if (lookahead.type == type)
 	{
@@ -126,9 +128,14 @@ void match(int type) {
 }
 
 int main()
-{
-	input = "x = 66+2+1; print x; print 2+x;";
-	lookahead = next_token();
-	prog();
+{		
+	getline(cin, input);
+	while (input != "")
+	{	
+		pos = 0;
+		lookahead = next_token();
+		prog();	
+		getline(cin, input);
+	}	
 	return 0;
 }

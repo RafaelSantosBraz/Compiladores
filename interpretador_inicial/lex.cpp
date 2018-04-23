@@ -31,7 +31,7 @@ char c = EOF;
 // contagem da linha atual
 int current_line = 0;
 // auxiliar de refrência à variável
-int var_reference;
+//int var_reference;
 
 string token_name(int t)
 {
@@ -126,7 +126,7 @@ token next_token()
 			if (pos != -1)
             {
                 t.value = pos;
-				var_reference = pos;
+				//var_reference = pos;
             }
             else
             {
