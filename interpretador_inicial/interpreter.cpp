@@ -17,7 +17,7 @@ void match(int);
 
 token lookahead;
 
-// auxiliar do cálculo de <expr>
+// auxiliar do cï¿½lculo de <expr>
 int calculus = 0;
 int value_ant = 0;
 
@@ -52,9 +52,10 @@ void loop()
 
 void cmd()
 {
+	//cout << "tamanho tabela: " << symbols.size() << endl;
 	if (lookahead.type == VAR)
-	{
-		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << lookahead.value << " " << calculus << endl;*/ cout << "aaa" << calculus << endl; value_insertion(lookahead.value, calculus); calculus = 0;
+	{		
+		match(VAR); match(EQ); expr(); /*match(EOL);*/ /*cout << var_reference << " " << calculus << endl; */ value_insertion(var_reference, calculus); calculus = 0;
 		//printf("Var %d %d", lookahead.value, get_value(lookahead.value));
 	}
 	else if (lookahead.type == PRINT)
@@ -75,6 +76,7 @@ void expr()
 	{
 	    //int aux = (get_value(lookahead.value) + rest());
 	    //cout << aux << endl;
+		//cout << "endereÃ§o de get: " << lookahead.value << endl;
 	    value_ant = get_value(lookahead.value);
 		match(VAR); rest();
 	}
@@ -125,10 +127,8 @@ void match(int type) {
 
 int main()
 {
-	input = "x = 66+2+1; print x;";
+	input = "x = 66+2+1; print x; print 2+x;";
 	lookahead = next_token();
 	prog();
-	value_insertion(get_index("x"), 69);
-	cout << get_value(get_index("x")) << endl;
 	return 0;
 }

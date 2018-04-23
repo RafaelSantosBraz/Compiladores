@@ -6,20 +6,20 @@
 
 using namespace std;
 
-// informações da tabela
+// informaï¿½ï¿½es da tabela
 struct info
 {
     string lexeme;
     int value;
 };
 
-// referência à tabela de símbolos
+// referï¿½ncia ï¿½ tabela de sï¿½mbolos
 typedef vector<info> table;
 
-// a tabela de símbolos
+// a tabela de sï¿½mbolos
 table symbols;
 
-// verifica se a variável existe na tabela
+// verifica se a variï¿½vel existe na tabela
 bool is_there(string lexeme)
 {
     for (int i = 0; i < symbols.size(); i++)
@@ -33,7 +33,7 @@ bool is_there(string lexeme)
     return false;
 }
 
-// insere uma nova variável na tabela
+// insere uma nova variï¿½vel na tabela
 int key_insertion(string lexeme)
 {
     if (!is_there(lexeme))
@@ -49,7 +49,7 @@ int key_insertion(string lexeme)
     }
 }
 
-// insere/altera o valor de uma variável
+// insere/altera o valor de uma variï¿½vel
 bool value_insertion(int index, int value)
 {
     if (index >= 0 && index < symbols.size())
@@ -65,7 +65,7 @@ bool value_insertion(int index, int value)
     }
 }
 
-// retorna o valor de uma variável
+// retorna o valor de uma variï¿½vel
 int get_value(int index)
 {
    if (index >= 0 && index < symbols.size())
@@ -79,7 +79,7 @@ int get_value(int index)
     }
 }
 
-// retorna o valor de uma variável
+// retorna o valor de uma variï¿½vel
 int get_index(string lexeme)
 {
    for (int i = 0; i < symbols.size(); i++)
@@ -92,8 +92,8 @@ int get_index(string lexeme)
     }
     return -1;
 }
-// função de teste
-int t()
+// funï¿½ï¿½o de teste
+int w()
 {
     int aux;
     cout << is_there("x") << endl;
