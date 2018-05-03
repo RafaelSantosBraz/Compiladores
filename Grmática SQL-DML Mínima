@@ -1,0 +1,45 @@
+<SQL> ::= <DML> <LOOP>
+
+<LOOP> ::= <SQL>
+        |  ;
+
+<DML> ::= INSERT <INS>
+        | UPDATE <UPD>
+        | DELETE <DEL>
+        | SELECT <SEL>
+
+<INS> ::= INTO ID <INSCOND>
+
+<INSCOND> ::= ( <ILOOP>
+           |  VALUES ( <VALOOP>
+
+<ILOOP> ::= ID <CONT>
+
+<CONT> ::= , <ILOOP>
+        |  ) VALUES ( <VALOOP>
+
+<VALOOP> ::= STRING <VCONT>
+          |  NUM <VCONT>
+
+<VCONT> ::= , <VALOOP>
+         |  ) 
+
+<UPD> ::= ID SET <UPDLOOP>
+
+<UPDLOOP> ::= ID = <EXPRE> <UPDCONT>
+
+<EXPRE> ::= STRING <EXPLOOP>
+         |  NUM <EXPLOOP>
+
+<EXPLOOP> ::= <OP> <EXPRE>
+           |  ¢ // VAZIO 
+
+<OP> ::= +
+      |  -
+      |  *
+      |  /
+
+<UPDCONT> ::= , <UPDLOOP>
+           |  WHERE <CONDICAO>
+
+<CONDICAO> ::=  
