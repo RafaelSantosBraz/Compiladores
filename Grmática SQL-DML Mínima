@@ -42,4 +42,22 @@
 <UPDCONT> ::= , <UPDLOOP>
            |  WHERE <CONDICAO>
 
-<CONDICAO> ::=  
+<CONDICAO> ::=  ----------------------------------------------
+
+<DEL> ::= FROM ID WHERE <CONDICAO>
+
+<SEL> ::= * <SELFIM>
+       |  <SELOOP> 
+
+<SELOOP> ::= ID <SELCONT>
+
+<SELCONT> ::= , <SELOOP>
+           |  <SELFIM>
+
+<SELFIM> ::= FROM ID WHERE <CONDICAO> ORDER BY ID
+
+Tokens complexos
+
+STRING
+NUM
+ID 
