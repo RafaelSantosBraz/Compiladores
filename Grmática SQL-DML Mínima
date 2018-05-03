@@ -1,7 +1,7 @@
-<SQL> ::= <DML> <LOOP>
+<SQL> ::= <DML> ; <LOOP>
 
-<LOOP> ::= <SQL>
-        |  ;
+<LOOP> ::= EOF
+        |  <SQL>
 
 <DML> ::= INSERT <INS>
         | UPDATE <UPD>
@@ -42,7 +42,14 @@
 <UPDCONT> ::= , <UPDLOOP>
            |  WHERE <CONDICAO>
 
-<CONDICAO> ::=  ----------------------------------------------
+<CONDICAO> ::= NOT <CONDASS>
+            |  <CONDASS>   
+
+<CONDASS> ::= ID = <EXPRE> <CONDLOOP>
+
+<CONDLOOP> ::= AND <CONDICAO>
+            |  OR <CONDICAO>
+            | ¢ // VAZIO    
 
 <DEL> ::= FROM ID WHERE <CONDICAO>
 
@@ -61,3 +68,4 @@ Tokens complexos
 STRING
 NUM
 ID 
+EOF
