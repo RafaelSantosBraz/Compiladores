@@ -14,7 +14,7 @@ void load_m_table()
     patch.open("table_definiton.txt");
     while (!patch.eof())
     {
-        string text;        
+        string text;
         getline(patch, text);
         vector<string> aux = split(text, ' ');
         element elem;
@@ -30,11 +30,13 @@ void load_m_table()
 void load_input()
 {
     string aux;
-    cin >> aux;
+    getline(cin, aux);
     for (int c = 0; c < aux.length(); c++)
     {
         input.push_back(aux[c]);
     }
+    input.push_back('$');
+    pos_input = 0;
 }
 
 // inicializa a pilha para utilização
@@ -44,10 +46,67 @@ void prepare_stack()
     symbols.push(m_table[0].variable);
 }
 
+// identifica se o char é um não terminal
+bool is_variable(char symbol)
+{
+    for (int c = 0; c < m_table.size(); c++)
+    {
+        if (m_table.at(c).variable == symbol)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+// casa o símbolo da pilha com a da entrada
+bool match(char symbol)
+{
+    if (symbol == input.at(pos_input))
+    {
+        pos_input++;
+        return true;
+    }
+    return false;
+}
+
 // aplicação do algoritmo de análise
 bool derivation()
 {
-    
+    char actual = symbols.top();
+    symbols.pop();
+    if (is_variable(actual))
+    {
+        for (int c = 0; c < m_table.size(); c++)
+        {
+            if (m_table.at(c).variable == actual && m_table.at(c).terminal == input.at(pos_input))
+            {
+                if ((m_table.at(c).product.size() > 1) || (m_table.at(c).product.size() == 1 && m_table.at(c).product.at(0) != '¢'))
+                {
+                    for (int i = m_table.at(c).product.size() - 1; i > -1; i--)
+                    {
+                        symbols.push(m_table.at(c).product.at(i));
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+    else
+    {
+        return match(actual);
+    }
+}
+
+// permanece derivando a entreda
+void derive_up()
+{
+    while (derivation())
+    {
+    }
+    cout << "ERROR!\n";
 }
 
 int main(int argc, char const *argv[])
@@ -55,9 +114,6 @@ int main(int argc, char const *argv[])
     load_m_table();
     load_input();
     prepare_stack();
-    if (!derivation())
-    {
-        cout << "ERROR!\n";
-    }
+    derive_up();
     return 0;
 }

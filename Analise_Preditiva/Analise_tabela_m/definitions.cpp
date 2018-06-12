@@ -21,3 +21,4 @@ stack<char> symbols;
 
 // representa o buffer de entrada
 vector<char> input;
+int pos_input;
