@@ -1,12 +1,12 @@
 E i TY
 E ( TY
-Y + +TY
+Y + TY
 Y ) ¢
 Y $ ¢
-T i FY
-T ( FY
+T i FX
+T ( FX
 X + ¢
-X * FX
+X * *FX
 X ) ¢
 X $ ¢
 F i i

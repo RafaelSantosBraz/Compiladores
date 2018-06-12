@@ -73,6 +73,7 @@ bool match(char symbol)
 // aplicação do algoritmo de análise
 bool derivation()
 {
+    printf("%c %c\n", symbols.top(), input.at(pos_input));   
     char actual = symbols.top();
     symbols.pop();
     if (is_variable(actual))
@@ -81,16 +82,19 @@ bool derivation()
         {
             if (m_table.at(c).variable == actual && m_table.at(c).terminal == input.at(pos_input))
             {
-                if ((m_table.at(c).product.size() > 1) || (m_table.at(c).product.size() == 1 && m_table.at(c).product.at(0) != '¢'))
+                if ((m_table.at(c).product.size() > 1))
                 {
                     for (int i = m_table.at(c).product.size() - 1; i > -1; i--)
                     {
                         symbols.push(m_table.at(c).product.at(i));
                     }
                 }
+                else if (m_table.at(c).product.at(0) != '¢')
+                {
+                    symbols.push(m_table.at(c).product.at(0));
+                }
                 return true;
             }
-            return false;
         }
         return false;
     }
@@ -103,17 +107,24 @@ bool derivation()
 // permanece derivando a entreda
 void derive_up()
 {
-    while (derivation())
+    while (derivation() && pos_input < input.size())
     {
     }
-    cout << "ERROR!\n";
+    if (symbols.empty())
+    {
+        cout << "Sucess!\n";
+    }
+    else
+    {
+        cout << "ERROR!\n";
+    }
 }
 
 int main(int argc, char const *argv[])
 {
     load_m_table();
     load_input();
-    prepare_stack();
+    prepare_stack();    
     derive_up();
     return 0;
 }
