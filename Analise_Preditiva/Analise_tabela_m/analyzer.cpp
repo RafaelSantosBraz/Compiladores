@@ -18,7 +18,7 @@ void load_m_table()
         getline(patch, text);
         vector<string> aux = split(text, ' ');
         element elem;
-        elem.variable = aux[0][0];
+        elem.variable = aux[0][0];        
         elem.terminal = aux[1][0];
         elem.product = aux[2];
         m_table.push_back(elem);
@@ -63,7 +63,7 @@ bool is_variable(char symbol)
 bool match(char symbol)
 {
     if (symbol == input.at(pos_input))
-    {
+    {        
         pos_input++;
         return true;
     }
@@ -73,7 +73,7 @@ bool match(char symbol)
 // aplicação do algoritmo de análise
 bool derivation()
 {
-    printf("%c %c\n", symbols.top(), input.at(pos_input));   
+    //printf("%c %c\n", symbols.top(), input.at(pos_input));
     char actual = symbols.top();
     symbols.pop();
     if (is_variable(actual))
@@ -89,9 +89,9 @@ bool derivation()
                         symbols.push(m_table.at(c).product.at(i));
                     }
                 }
-                else if (m_table.at(c).product.at(0) != '¢')
+                else if (m_table.at(c).product.at(0) != '#')
                 {
-                    symbols.push(m_table.at(c).product.at(0));
+                    symbols.push(m_table.at(c).product.at(0));                    
                 }
                 return true;
             }
@@ -108,7 +108,7 @@ bool derivation()
 void derive_up()
 {
     while (derivation() && pos_input < input.size())
-    {
+    {            
     }
     if (symbols.empty())
     {
@@ -124,7 +124,7 @@ int main(int argc, char const *argv[])
 {
     load_m_table();
     load_input();
-    prepare_stack();    
+    prepare_stack();
     derive_up();
     return 0;
 }
