@@ -19,7 +19,7 @@ void load_m_table()
         vector<string> aux = split(text, ' ');
         element elem;
         elem.variable = aux[0][0];        
-        elem.terminal = aux[1][0];
+        elem.terminal = (int)aux[1][0];
         elem.product = aux[2];
         m_table.push_back(elem);
     }

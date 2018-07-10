@@ -2,15 +2,7 @@
 #include "string"
 #include "iostream"
 #include "cstdlib"
-
-// constantes para types dos tokens
-#define ID 256
-#define ADD 257
-#define MUL 258
-#define OPP 259
-#define CLP 260
-#define MON 261
-#define EOF -1
+#include "tokens.cpp"
 
 using namespace std;
 
