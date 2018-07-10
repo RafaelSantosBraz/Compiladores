@@ -83,7 +83,7 @@ token next_token()
         {
             aux += peek;
             peek = get_char();
-        } while (peek != '+' && peek != '*' && peek != '(' && peek != ')');
+        } while (peek != '+' && peek != '*' && peek != '(' && peek != ')' && peek != EOF);
         t.type = ID;
         t.value = aux;
         c = peek;

@@ -18,12 +18,12 @@ void load_m_table()
         getline(patch, text);
         vector<string> aux = split(text, ' ');
         element elem;
-        elem.variable = stoi(aux[0]);        
-        elem.terminal = stoi(aux[1]);
+        elem.variable = atoi(aux[0].c_str());        
+        elem.terminal = atoi(aux[1].c_str());
         aux = split(aux[2], ',');
         for (int c = 0; c < aux.size(); c++)
         {
-            elem.product.push_back(stoi(aux[c]));
+            elem.product.push_back(atoi(aux[c].c_str()));
         }
         m_table.push_back(elem);
     }

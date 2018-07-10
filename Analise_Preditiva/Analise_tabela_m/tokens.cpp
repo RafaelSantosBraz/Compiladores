@@ -8,8 +8,7 @@
 #define MON 261
 #define E 262
 #define NUL 263
-#define Y 264
+#define Y 264 // E'
 #define T 265
-#define X 266
+#define X 266 // T'
 #define F 267
-#define EOF -1
