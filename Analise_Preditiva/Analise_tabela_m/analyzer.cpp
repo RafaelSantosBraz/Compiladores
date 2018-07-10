@@ -29,13 +29,14 @@ void load_m_table()
 // faz a leitura da entrada para preencher o buffer
 void load_input()
 {
-    string aux;
-    getline(cin, aux);
-    for (int c = 0; c < aux.length(); c++)
+    getline(cin, input_lex);
+    token end = next_token();
+    do 
     {
-        input.push_back(aux[c]);
-    }
-    input.push_back('$');
+        input.push_back(end);   
+    } while ((end = next_token()).type != EOF);
+    end.type = MON;
+    input.push_back(end);
     pos_input = 0;
 }
 
@@ -60,7 +61,7 @@ bool is_variable(char symbol)
 }
 
 // casa o símbolo da pilha com a da entrada
-bool match(char symbol)
+bool match(token symbol)
 {
     if (symbol == input.at(pos_input))
     {        
@@ -73,7 +74,6 @@ bool match(char symbol)
 // aplicação do algoritmo de análise
 bool derivation()
 {
-    //printf("%c %c\n", symbols.top(), input.at(pos_input));
     char actual = symbols.top();
     symbols.pop();
     if (is_variable(actual))

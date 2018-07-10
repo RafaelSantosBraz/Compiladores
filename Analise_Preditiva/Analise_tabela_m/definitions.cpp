@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include "lex.cpp"
 
 using namespace std;
 
@@ -20,5 +21,5 @@ vector<element> m_table;
 stack<char> symbols;
 
 // representa o buffer de entrada
-vector<char> input;
+vector<token> input;
 int pos_input;
