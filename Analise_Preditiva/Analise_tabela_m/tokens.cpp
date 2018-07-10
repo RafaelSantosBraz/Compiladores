@@ -1,4 +1,5 @@
 // constantes para types dos tokens, tanto os de entrada quanto os símbolos da grmática
+
 #define ID 256
 #define ADD 257
 #define MUL 258

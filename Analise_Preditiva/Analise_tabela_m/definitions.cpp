@@ -10,15 +10,15 @@ using namespace std;
 struct element
 {
     int terminal;
-    char variable;
-    vector<token> product;
+    int variable;
+    vector<int> product;
 };
 
 // representação da tabela m como vetor de células
 vector<element> m_table;
 
 // pilha auxiliar do analisador
-stack<token> symbols;
+stack<int> symbols;
 
 // representa o buffer de entrada
 vector<token> input;

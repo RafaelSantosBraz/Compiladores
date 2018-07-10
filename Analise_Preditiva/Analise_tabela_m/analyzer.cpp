@@ -18,9 +18,13 @@ void load_m_table()
         getline(patch, text);
         vector<string> aux = split(text, ' ');
         element elem;
-        elem.variable = aux[0][0];        
-        elem.terminal = (int)aux[1][0];
-        elem.product = aux[2];
+        elem.variable = stoi(aux[0]);        
+        elem.terminal = stoi(aux[1]);
+        aux = split(aux[2], ',');
+        for (int c = 0; c < aux.size(); c++)
+        {
+            elem.product.push_back(stoi(aux[c]));
+        }
         m_table.push_back(elem);
     }
     patch.close();
@@ -43,12 +47,12 @@ void load_input()
 // inicializa a pilha para utilização
 void prepare_stack()
 {
-    symbols.push('$');
+    symbols.push(MON);
     symbols.push(m_table[0].variable);
 }
 
 // identifica se o char é um não terminal
-bool is_variable(char symbol)
+bool is_variable(int symbol)
 {
     for (int c = 0; c < m_table.size(); c++)
     {
@@ -61,9 +65,9 @@ bool is_variable(char symbol)
 }
 
 // casa o símbolo da pilha com a da entrada
-bool match(token symbol)
+bool match(int symbol)
 {
-    if (symbol == input.at(pos_input))
+    if (symbol == input.at(pos_input).type)
     {        
         pos_input++;
         return true;
@@ -74,13 +78,13 @@ bool match(token symbol)
 // aplicação do algoritmo de análise
 bool derivation()
 {
-    char actual = symbols.top();
+    int actual = symbols.top();
     symbols.pop();
     if (is_variable(actual))
     {
         for (int c = 0; c < m_table.size(); c++)
         {
-            if (m_table.at(c).variable == actual && m_table.at(c).terminal == input.at(pos_input))
+            if (m_table.at(c).variable == actual && m_table.at(c).terminal == input.at(pos_input).type)
             {
                 if ((m_table.at(c).product.size() > 1))
                 {
@@ -89,7 +93,7 @@ bool derivation()
                         symbols.push(m_table.at(c).product.at(i));
                     }
                 }
-                else if (m_table.at(c).product.at(0) != '#')
+                else if (m_table.at(c).product.at(0) != NUL)
                 {
                     symbols.push(m_table.at(c).product.at(0));                    
                 }

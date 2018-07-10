@@ -29,6 +29,8 @@
         "sstream": "cpp",
         "cinttypes": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "deque": "cpp",
+        "xstring": "cpp"
     }
 }
