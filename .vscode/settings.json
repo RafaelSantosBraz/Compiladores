@@ -31,6 +31,9 @@
         "tuple": "cpp",
         "utility": "cpp",
         "deque": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "stack": "cpp",
+        "xutility": "cpp",
+        "xlocale": "cpp"
     }
 }
