@@ -1,0 +1,73 @@
+#   Automatically generated grammar
+
+.lang        "js" 
+.getsym      "chr = this.buff.charAt(this.l++)"
+.positioning "full"
+.class       "myparser"
+
+# Vocabulary
+
+_skip:        /\/\/.*/
+_skip:        /[\t\r\n ]+/                      { continue; }
+'eol':        /;/
+'read':       /read/
+'write':      /write/
+'=':          /=/
+'if':         /if/
+'then':       /then/
+'else':       /else/
+'(':		  /\(/
+')':		  /\)/
+'==':         /==/
+'begin':      /begin/
+'end':        /end/
+'id':         /[a-zA-Z_][a-zA-Z_0-9]*/  -1
+
+# Attributes
+
+[]
+
+# Grammar
+
+input ::= 
+    prog { dump("[good]"); } ;
+
+prog ::= 
+      cmd 'eol'
+    | prog cmd 'eol' ;
+
+cmd ::= 
+	  io
+    | if ;
+
+io ::= 
+      'read' 'id'
+    | 'write' 'id'
+    | 'id' '=' 'id' ;
+
+if ::= 
+      'if' cond 'then' block
+    | 'if' cond 'then' block 'else' block ;
+
+cond ::= 
+      '(' 'id' ')'
+    | '(' 'id' '==' 'id' ')' ;
+
+block ::= 
+    'begin' cmd 'end' ;
+
+%%
+
+dump = alert;
+
+function error(s) {
+	dump(s);
+}
+
+function parse(string) {
+	var p = new myparser();
+	p.buff = string;
+	p.l = 0;
+//	p.DEBUG_syntax = 1;
+	p.parse();
+}
