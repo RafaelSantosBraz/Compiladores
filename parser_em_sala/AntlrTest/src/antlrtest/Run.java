@@ -34,7 +34,7 @@ public class Run {
         String filename = "test.src";
         if (args.length >= 1) {
             filename = args[0];
-        }
+        } 
         CharStream stream = null;
         if (filename != null) {
             stream = new ANTLRFileStream(filename);
@@ -44,8 +44,8 @@ public class Run {
         ProgLexer lexer = new ProgLexer(stream);            //Lexer
         TokenStream tokens = new CommonTokenStream(lexer);  //nextToken 
         ProgParser parser = new ProgParser(tokens);         //Parser
-        ProgParser.ProgContext prog
-                = parser.prog();        //Exec Parser prog
+        ProgParser.ProgContext prog = 
+        parser.prog();        //Exec Parser prog
         showParseTreeFrame(prog, parser);
         System.out.println(SymbolTable.getInstance().dumpTable());
     }
