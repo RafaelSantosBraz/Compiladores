@@ -29,7 +29,7 @@ public class Run {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String filename = "test.src";
+        String filename = "test_1.src";
         if (args.length >= 1) {
             filename = args[0];
         } 
