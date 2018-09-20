@@ -17,9 +17,7 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import parser.ProgLexer;
-import parser.ProgParser;
-import parser.SymbolTable;
+import parser.*;
 
 /**
  *
@@ -41,16 +39,16 @@ public class Run {
         } else {
             stream = new ANTLRInputStream(System.in);
         }
-        ProgLexer lexer = new ProgLexer(stream);            //Lexer
+        Prog_1Lexer lexer = new Prog_1Lexer(stream);            //Lexer
         TokenStream tokens = new CommonTokenStream(lexer);  //nextToken 
-        ProgParser parser = new ProgParser(tokens);         //Parser
-        ProgParser.ProgContext prog = 
+        Prog_1Parser parser = new Prog_1Parser(tokens);         //Parser
+        Prog_1Parser.ProgContext prog = 
         parser.prog();        //Exec Parser prog
         showParseTreeFrame(prog, parser);
         System.out.println(SymbolTable.getInstance().dumpTable());
     }
 
-    private static void showParseTreeFrame(ParseTree tree, ProgParser parser) throws HeadlessException {
+    private static void showParseTreeFrame(ParseTree tree, Prog_1Parser parser) throws HeadlessException {
         JFrame frame = new JFrame("SRC: " + tree.getText());
         JPanel panel = new JPanel();
         TreeViewer viewr = new TreeViewer(Arrays.asList(
