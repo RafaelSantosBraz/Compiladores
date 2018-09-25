@@ -1,9 +1,11 @@
-write "insira n1";
-read n1;
-write "insira n2";
-read n2;
- if n1>n2 then 
-    write n1;
- else
-    write n2;
-
+x = 1 + 2 - (1 + 1) * 2;
+if x <= 10 then 
+begin
+    write x; 
+end
+else 
+begin 
+    write "eita"; 
+    read x;
+    write x + 1;
+end

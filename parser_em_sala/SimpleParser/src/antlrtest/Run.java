@@ -32,7 +32,7 @@ public class Run {
         String filename = "test_1.src";
         if (args.length >= 1) {
             filename = args[0];
-        } 
+        }
         CharStream stream = null;
         if (filename != null) {
             stream = new ANTLRFileStream(filename);
@@ -42,10 +42,12 @@ public class Run {
         Prog_1Lexer lexer = new Prog_1Lexer(stream);            //Lexer
         TokenStream tokens = new CommonTokenStream(lexer);  //nextToken 
         Prog_1Parser parser = new Prog_1Parser(tokens);         //Parser
-        Prog_1Parser.ProgContext prog = 
-        parser.prog();        //Exec Parser prog
+        Prog_1Parser.ProgContext prog
+                = parser.prog();        //Exec Parser prog
         showParseTreeFrame(prog, parser);
         System.out.println(SymbolTable.getInstance().dumpTable());
+        MyProgVisitor pv = new MyProgVisitor();
+        pv.visit(prog);
     }
 
     private static void showParseTreeFrame(ParseTree tree, Prog_1Parser parser) throws HeadlessException {
