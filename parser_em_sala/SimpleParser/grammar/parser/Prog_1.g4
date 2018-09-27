@@ -31,7 +31,7 @@ read : READ VAR
 expr returns [Double value]
      : expr '+' term    #exprPlus
      | expr '-' term    #exprMin
-     | expr term        #exprHided //Exemplo: n1=-10+5;
+     | expr term        #exprHided
      | term             #exprTerm
      ;
 
