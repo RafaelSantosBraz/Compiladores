@@ -107,22 +107,22 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     }
 
     @Override
-    public Object visitConfRelop(Prog_1Parser.ConfRelopContext ctx) {
-        Double var = Util.getValue(ctx.VAR().getText());
-        Double expr = (Double) visit(ctx.expr());
+    public Object visitCondRelop(Prog_1Parser.CondRelopContext ctx) {
+        Double expr1 = (Double) visit(ctx.e1);
+        Double expr2 = (Double) visit(ctx.e2);
         switch (ctx.RELOP().getText()) {
             case ">":
-                return (var - expr > 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 > 0) ? Boolean.TRUE : Boolean.FALSE;
             case "<":
-                return (var - expr < 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 < 0) ? Boolean.TRUE : Boolean.FALSE;
             case ">=":
-                return (var - expr >= 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 >= 0) ? Boolean.TRUE : Boolean.FALSE;
             case "<=":
-                return (var - expr <= 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 <= 0) ? Boolean.TRUE : Boolean.FALSE;
             case "==":
-                return (var - expr == 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 == 0) ? Boolean.TRUE : Boolean.FALSE;
             case "!=":
-                return (var - expr != 0) ? Boolean.TRUE : Boolean.FALSE;
+                return (expr1 - expr2 != 0) ? Boolean.TRUE : Boolean.FALSE;
         }
         return null;
     }

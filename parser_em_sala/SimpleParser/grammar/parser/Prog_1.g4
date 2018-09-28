@@ -15,7 +15,8 @@ cmd  : atrib EOL    #cmdAtrib
      | write EOL    #cmdWrite
      | read EOL     #cmdRead
      | expr EOL     #cmdExpr
-     | ifstm        #cmdIf
+     | decl EOL     #cmdDecl
+     | ifstm        #cmdIf     
      ;
 
 atrib: VAR '=' expr           
@@ -47,13 +48,17 @@ fact returns [Double value]
      | '(' expr ')'           #factExpr
      ;
 
+decl : TYPE VAR          #declSimple
+     | TYPE atrib        #declValue
+     ;
+
 ifstm: IF cond THEN block                       #ifStm
      | IF cond THEN b1=block ELSE b2=block      #ifStmElse
      ;
 
 cond returns [Boolean value]
-     : expr                   #condExpr 
-     | VAR RELOP expr         #confRelop
+     : expr                    #condExpr 
+     | e1=expr RELOP e2=expr   #condRelop
      ;
 
 block: cmd                #blockSingle
@@ -70,6 +75,9 @@ STR     : '"'[a-zA-Z0-9\t ]*'"';
 READ    : [rR][eE][aA][dD];
 WRITE   : [wW][rR][iI][tT][eE];
 VAR     : [_a-zA-Z][_a-zA-Z0-9]*;
+TYPE    : INT|DOUBLE;
+INT     : [iI][nN][tT];
+DOUBLE  : [dD][oO][uU][bB][lL][eE];
 MULT    : '*';
 SUM     : '+';
 MIN     : '-';
