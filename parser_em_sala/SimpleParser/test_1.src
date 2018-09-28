@@ -1,11 +1,2 @@
-x = 1 + 2 - (1 + 1) * 2;
-if x <= 10 then 
-begin
-    write x; 
-end
-else 
-begin 
-    write "eita"; 
-    read x;
-    write x + 1;
-end
+int x;
+int y = x + 1.98;

@@ -1,12 +1,12 @@
 Gramática
-    Ajustar a precedência das expressões
+    Ajustar a precedência das expressões OK
     Ajustar a expressão regular da string
     Adicionar o uso de comentários na sua linguagem
-    Inserir o tipo integer
-    Declarar variaveis
+    Inserir o tipo integer OK
+    Declarar variaveis OK
 
-Criar o visitor da arvore de derivação
-Adicionar regras semânticas no visitor
+Criar o visitor da arvore de derivação OK
+Adicionar regras semânticas no visitor OK
 
 Verificação semântica
     Variável declarada

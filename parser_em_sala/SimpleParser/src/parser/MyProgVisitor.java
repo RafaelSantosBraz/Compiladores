@@ -127,4 +127,24 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
         return null;
     }
 
+    @Override
+    public Object visitDeclSimple(Prog_1Parser.DeclSimpleContext ctx) {
+        String var = ctx.VAR().getText();
+        switch (ctx.TYPE().getSymbol().getType()) {
+            case 12:
+                Util.declaration(var, 0);
+            case 13:
+                Util.declaration(var, 0.0);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitDeclValue(Prog_1Parser.DeclValueContext ctx) {
+        String var = ctx.VAR().getText();
+        Number expr = (Number) visit(ctx.expr());
+        Util.declaration(var, expr);
+        return null;
+    }
+
 }

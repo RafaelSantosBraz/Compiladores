@@ -27,29 +27,33 @@ public class SymbolTable {
     }
     //</editor-fold>
 
-    protected HashMap<String, Double> memory;
+    private final HashMap<String, Number> memory;
 
     private SymbolTable() {
         memory = new HashMap<>();
     }
 
-    public void addSymbol(String token, Double value) {
+    public Boolean isThere(String Symbol) {
+        return memory.containsKey(Symbol);
+    }
+
+    public void addSymbol(String token, Number value) {
         memory.put(token, value);
     }
-    
-    public Double getSymbol(String token) {
+
+    public Number getSymbol(String token) {
         return memory.get(token);
     }
 
-    public String dumpTable(){
-      StringBuilder sb = new StringBuilder();
-      sb.append("---Symbols---\n");
-      for (Map.Entry<String, Double> e : memory.entrySet()){
-          sb.append(String.format(" %s -> %f \n", e.getKey(), e.getValue()));
-      }
-      sb.append("-------------\n");
-      return sb.toString();
-      
+    public String dumpTable() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("---Symbols---\n");
+        for (Map.Entry<String, Number> e : memory.entrySet()) {
+            sb.append(String.format(" %s -> %f \n", e.getKey(), e.getValue()));
+        }
+        sb.append("-------------\n");
+        return sb.toString();
+
     }
-    
+
 }

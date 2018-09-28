@@ -48,8 +48,8 @@ fact returns [Double value]
      | '(' expr ')'           #factExpr
      ;
 
-decl : TYPE VAR          #declSimple
-     | TYPE atrib        #declValue
+decl : TYPE VAR            #declSimple
+     | TYPE VAR '=' expr   #declValue
      ;
 
 ifstm: IF cond THEN block                       #ifStm
@@ -74,10 +74,10 @@ BEGIN   : [bB][eE][gG][iI][nN];
 STR     : '"'[a-zA-Z0-9\t ]*'"';
 READ    : [rR][eE][aA][dD];
 WRITE   : [wW][rR][iI][tT][eE];
-VAR     : [_a-zA-Z][_a-zA-Z0-9]*;
 TYPE    : INT|DOUBLE;
 INT     : [iI][nN][tT];
 DOUBLE  : [dD][oO][uU][bB][lL][eE];
+VAR     : [_a-zA-Z][_a-zA-Z0-9]*;
 MULT    : '*';
 SUM     : '+';
 MIN     : '-';
