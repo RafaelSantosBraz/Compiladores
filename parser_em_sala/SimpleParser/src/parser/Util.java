@@ -14,12 +14,12 @@ import java.util.Scanner;
  */
 public class Util {
 
-    public static Boolean getBoolean(Double d) {
-        return !(d == null || d <= 0);
+    public static Boolean getBoolean(Number d) {
+        return !(d == null || d.doubleValue() <= 0);
     }
 
-    public static Double getValue(String symbol) {
-        Double v = (Double) SymbolTable.getInstance().getSymbol(symbol);
+    public static Number getValue(String symbol) {
+        Number v = SymbolTable.getInstance().getSymbol(symbol);
         if (v == null) {
             error(String.format("variável %s não foi declarada", symbol));
         }
@@ -38,20 +38,13 @@ public class Util {
         if (!isThere(symbol)) {
             atrib(symbol, value);
         } else {
-            Util.error("Variável já declarada!");
+            Util.error("Variável " + symbol + " já declarada!");
         }
     }
 
     public static Number read() {
-        try {
-            return Integer.parseInt(new Scanner(System.in).nextLine());
-        } catch (NumberFormatException e) {
-            try {
-                return Double.parseDouble(new Scanner(System.in).nextLine());
-            } catch (NumberFormatException f) {
-                return null;
-            }
-        }
+        String n = new Scanner(System.in).nextLine();
+        return stringNumberConvertion(n);
     }
 
     public static void readSymbol(String symbol) {
@@ -68,11 +61,52 @@ public class Util {
         System.err.println(value);
     }
 
-    public static void print(String value) {
-        System.out.println(value.substring(1, value.length() - 1));
+    public static void print(Object value) {
+        if (value instanceof String) {
+            System.out.println(value.toString().substring(1, value.toString().length() - 1));
+        } else {
+            System.out.println(value);
+        }
     }
 
-    public static void print(Double value) {
-        System.out.println(value);
+    public static Number mathOperation(Integer op, Number x, Number y) {
+        Double n1 = x.doubleValue();
+        Double n2 = y.doubleValue();
+        Double result = 0.0;
+        switch (op) {
+            case 0:
+                result = n1 + n2;
+                break;
+            case 1:
+                result = n1 - n2;
+                break;
+            case 2:
+                result = n1 * n2;
+                break;
+            case 3:
+                result = n1 / n2;
+                break;
+        }
+        return typeConvertion(result, x, y);
     }
+
+    public static Number typeConvertion(Double result, Number x, Number y) {
+        if (x instanceof Integer && y instanceof Integer) {
+            return result.intValue();
+        }
+        return result;
+    }
+
+    public static Number stringNumberConvertion(String n) {
+        try {
+            return Integer.parseInt(n);
+        } catch (NumberFormatException e) {
+            try {
+                return Double.parseDouble(n);
+            } catch (NumberFormatException f) {
+                return null;
+            }
+        }
+    }
+
 }

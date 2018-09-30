@@ -29,27 +29,31 @@ write: WRITE expr       #writeExpr
 read : READ VAR               
      ;
 
-expr returns [Double value]
+expr returns [Number value]
      : expr '+' term    #exprPlus
      | expr '-' term    #exprMin
      | expr term        #exprHided
      | term             #exprTerm
      ;
 
-term returns [Double value]
+term returns [Number value]
      : term '*' fact    #termMult
      | term '/' fact    #termDiv
      | fact             #termFact
      ;
 
-fact returns [Double value]
+fact returns [Number value]
      : NUM                    #factNum
      | VAR                    #factVar
      | '(' expr ')'           #factExpr
      ;
 
-decl : TYPE VAR            #declSimple
-     | TYPE VAR '=' expr   #declValue
+decl : type VAR            #declSimple
+     | type VAR '=' expr   #declValue
+     ;
+
+type : INT              #typeInt
+     | DOUBLE           #typeDouble
      ;
 
 ifstm: IF cond THEN block                       #ifStm
@@ -74,7 +78,6 @@ BEGIN   : [bB][eE][gG][iI][nN];
 STR     : '"'[a-zA-Z0-9\t ]*'"';
 READ    : [rR][eE][aA][dD];
 WRITE   : [wW][rR][iI][tT][eE];
-TYPE    : INT|DOUBLE;
 INT     : [iI][nN][tT];
 DOUBLE  : [dD][oO][uU][bB][lL][eE];
 VAR     : [_a-zA-Z][_a-zA-Z0-9]*;

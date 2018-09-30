@@ -1,2 +1,4 @@
-int x;
-int y = x + 1.98;
+int x = 2;
+int y = x + 3.0;
+write x;
+write y;
