@@ -106,7 +106,7 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     }
 
     @Override
-    public Object visitCondRelop(Prog_1Parser.CondRelopContext ctx) {
+    public Object visitCondRelop(Prog_1Parser.CondRelopContext ctx) {        
         Double expr1 = ((Number) visit(ctx.e1)).doubleValue();
         Double expr2 = ((Number) visit(ctx.e2)).doubleValue();
         switch (ctx.RELOP().getText()) {
@@ -127,13 +127,14 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     }
 
     @Override
-    public Object visitDeclSimple(Prog_1Parser.DeclSimpleContext ctx) {        
-        switch ((Integer)visit(ctx.type())) {
+    public Object visitDeclSimple(Prog_1Parser.DeclSimpleContext ctx) {
+        Integer type = (Integer) visit(ctx.type());
+        switch (type) {
             case 11:
-                Util.declaration(ctx.VAR().getText(), 0);
+                Util.declaration(type, ctx.VAR().getText(), 0);
                 break;
             case 12:
-                Util.declaration(ctx.VAR().getText(), 0.0);
+                Util.declaration(type, ctx.VAR().getText(), 0.0);
                 break;
         }
         return null;
@@ -141,7 +142,7 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
 
     @Override
     public Object visitDeclValue(Prog_1Parser.DeclValueContext ctx) {
-        Util.declaration(ctx.VAR().getText(), (Number) visit(ctx.expr()));
+        Util.declaration((Integer) visit(ctx.type()), ctx.VAR().getText(), (Number) visit(ctx.expr()));
         return null;
     }
 
@@ -154,7 +155,5 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     public Object visitTypeDouble(Prog_1Parser.TypeDoubleContext ctx) {
         return ctx.DOUBLE().getSymbol().getType();
     }
-    
-    
-    
+
 }

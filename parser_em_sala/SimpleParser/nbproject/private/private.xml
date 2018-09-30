@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/media/rafael/Dados%20Compartilhados/GitHub/Compiladores/parser_em_sala/SimpleParser/grammar/parser/Prog_1.g4</file>
+            <file>file:/media/rafael/Dados%20Compartilhados/GitHub/Compiladores/parser_em_sala/SimpleParser/src/parser/SymbolTable.java</file>
+            <file>file:/media/rafael/Dados%20Compartilhados/GitHub/Compiladores/parser_em_sala/SimpleParser/test_1.src</file>
+            <file>file:/media/rafael/Dados%20Compartilhados/GitHub/Compiladores/parser_em_sala/SimpleParser/src/parser/Util.java</file>
             <file>file:/media/rafael/Dados%20Compartilhados/GitHub/Compiladores/parser_em_sala/SimpleParser/src/parser/MyProgVisitor.java</file>
         </group>
     </open-files>

@@ -31,12 +31,22 @@ public class Util {
     }
 
     public static void atrib(String symbol, Number value) {
-        SymbolTable.getInstance().addSymbol(symbol, value);
+        if (isThere(symbol)) {
+            if (compatibilityTest(symbol, value)) {
+                SymbolTable.getInstance().addSymbol(symbol, typeConvertion(getTokenType(getValue(symbol)), value));
+            }
+        } else {
+            error("Variável " + symbol + " não declarada!");
+        }
     }
 
-    public static void declaration(String symbol, Number value) {
+    public static void declaration(Integer type, String symbol, Number value) {
         if (!isThere(symbol)) {
-            atrib(symbol, value);
+            if (typeMatchTest(type, value)) {
+                SymbolTable.getInstance().addSymbol(symbol, typeConvertion(type, value));
+            } else {
+                Util.error("Tipo incorreto para atribuição!");
+            }
         } else {
             Util.error("Variável " + symbol + " já declarada!");
         }
@@ -52,7 +62,7 @@ public class Util {
         if (d == null) {
             error("entrada invalida");
         } else {
-            SymbolTable.getInstance().addSymbol(symbol, d);
+            atrib(symbol, d);
         }
     }
 
@@ -62,32 +72,37 @@ public class Util {
     }
 
     public static void print(Object value) {
-        if (value instanceof String) {
-            System.out.println(value.toString().substring(1, value.toString().length() - 1));
-        } else {
-            System.out.println(value);
+        if (value != null) {
+            if (value instanceof String) {
+                System.out.println(value.toString().substring(1, value.toString().length() - 1));
+            } else {
+                System.out.println(value);
+            }
         }
     }
 
     public static Number mathOperation(Integer op, Number x, Number y) {
-        Double n1 = x.doubleValue();
-        Double n2 = y.doubleValue();
-        Double result = 0.0;
-        switch (op) {
-            case 0:
-                result = n1 + n2;
-                break;
-            case 1:
-                result = n1 - n2;
-                break;
-            case 2:
-                result = n1 * n2;
-                break;
-            case 3:
-                result = n1 / n2;
-                break;
+        if (x != null && y != null) {
+            Double n1 = x.doubleValue();
+            Double n2 = y.doubleValue();
+            Double result = 0.0;
+            switch (op) {
+                case 0:
+                    result = n1 + n2;
+                    break;
+                case 1:
+                    result = n1 - n2;
+                    break;
+                case 2:
+                    result = n1 * n2;
+                    break;
+                case 3:
+                    result = n1 / n2;
+                    break;
+            }
+            return typeConvertion(result, x, y);
         }
-        return typeConvertion(result, x, y);
+        return null;
     }
 
     public static Number typeConvertion(Double result, Number x, Number y) {
@@ -95,6 +110,16 @@ public class Util {
             return result.intValue();
         }
         return result;
+    }
+
+    public static Number typeConvertion(Integer type, Number value) {
+        switch (type) {
+            case 11:
+                return value.intValue();
+            case 12:
+                return value.doubleValue();
+        }
+        return null;
     }
 
     public static Number stringNumberConvertion(String n) {
@@ -109,4 +134,33 @@ public class Util {
         }
     }
 
+    public static Boolean typeMatchTest(Integer type, Number value) {
+        switch (type) {
+            case 11:
+                if (value instanceof Integer) {
+                    return true;
+                }
+                return false;
+            case 12:
+                if (value instanceof Double || value instanceof Integer) {
+                    return true;
+                }
+                return false;
+        }
+        return false;
+    }
+
+    public static Boolean compatibilityTest(String symbol, Number value) {
+        Number currentType = getTokenType(getValue(symbol));
+        return typeMatchTest(currentType.intValue(), value);
+    }
+
+    public static Integer getTokenType(Number value) {
+        if (value instanceof Integer) {
+            return 11;
+        } else if (value instanceof Double) {
+            return 12;
+        }
+        return null;
+    }
 }
