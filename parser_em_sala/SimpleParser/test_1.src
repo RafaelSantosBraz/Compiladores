@@ -1,5 +1,7 @@
+write "x =  n2";
+// isso é uma declaração
 int x = 2;
-double y = x + 3.0 + z;
-if y < x then
+double y = x + 3.0; //será que funciona? x=10;
+if y > x then
     write "sim";
 
