@@ -12,26 +12,12 @@ import parser.MiniLangParser;
  *
  * @author wellington
  */
-public class MyVisitor extends MiniLangBaseVisitor<Object>{
+public class MyVisitor extends MiniLangBaseVisitor<Object> {
 
     @Override
-    public Object visitExprNum(MiniLangParser.ExprNumContext ctx) {
-        String num = ctx.NUM().getText();
-        Double d = Double.parseDouble(num);
-        ctx.result = d;
-        return d;
+    public Object visitPrintExpr(MiniLangParser.PrintExprContext ctx) {
+        
     }
-
-    @Override
-    public Object visitIfElseStmt(MiniLangParser.IfElseStmtContext ctx) {
-        Boolean cond = (Boolean) visit(ctx.cond());
-        if (cond){
-            return visit(ctx.block(0));
-        } else {
-            return visit(ctx.block(1));
-        }
-    }
-
 
     
 }
