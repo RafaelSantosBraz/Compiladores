@@ -60,9 +60,18 @@ ifstm: IF cond THEN block                       #ifStm
      | IF cond THEN b1=block ELSE b2=block      #ifStmElse
      ;
 
-cond returns [Boolean value]
-     : expr                    #condExpr 
-     | e1=expr RELOP e2=expr   #condRelop
+cond : '(' cond OR cdand ')' #condOR
+     | cdand                 #condAnd        
+     ;
+
+cdand: '(' cdand AND cndts ')'     #cdandAnd
+     | cndts                       #cdandCndts
+     ;
+
+cndts: '(' expr ')'                         #cndtsExpr
+     | '(' e1=expr RELOP e2=expr ')'        #cndtsRelop
+     | '!' ('(' expr ')')                   #cndtsNotExpr
+     | '!' ('(' e1=expr RELOP e2=expr ')')  #cndtsNotRelop
      ;
 
 block: cmd                #blockSingle
@@ -70,6 +79,9 @@ block: cmd                #blockSingle
      ;
 
 RELOP   : '>'|'<'|'>='|'<='|'=='|'!=';
+OR      : '||';
+AND     : '&&';
+NOT     : '!';
 IF      : [iI][fF];
 THEN    : [tT][hH][eE][nN];
 ELSE    : [eE][lL][sS][eE];

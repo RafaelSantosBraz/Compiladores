@@ -49,7 +49,8 @@ public class SymbolTable {
         StringBuilder sb = new StringBuilder();
         sb.append("---Symbols---\n");
         for (Map.Entry<String, Number> e : memory.entrySet()) {
-            sb.append(String.format(" %s -> %f \n", e.getKey(), e.getValue()));
+            Number aux = e.getValue();
+            sb.append(String.format(" %s -> %f \n", e.getKey(), Util.typeConvertion(Util.getTokenType(aux), aux)));
         }
         sb.append("-------------\n");
         return sb.toString();

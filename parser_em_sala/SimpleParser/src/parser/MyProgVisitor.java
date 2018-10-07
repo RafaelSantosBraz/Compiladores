@@ -101,39 +101,13 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     }
 
     @Override
-    public Object visitCondExpr(Prog_1Parser.CondExprContext ctx) {
-        return Util.getBoolean((Number) visit(ctx.expr()));
-    }
-
-    @Override
-    public Object visitCondRelop(Prog_1Parser.CondRelopContext ctx) {        
-        Double expr1 = ((Number) visit(ctx.e1)).doubleValue();
-        Double expr2 = ((Number) visit(ctx.e2)).doubleValue();
-        switch (ctx.RELOP().getText()) {
-            case ">":
-                return (expr1 - expr2 > 0.0) ? Boolean.TRUE : Boolean.FALSE;
-            case "<":
-                return (expr1 - expr2 < 0.0) ? Boolean.TRUE : Boolean.FALSE;
-            case ">=":
-                return (expr1 - expr2 >= 0.0) ? Boolean.TRUE : Boolean.FALSE;
-            case "<=":
-                return (expr1 - expr2 <= 0.0) ? Boolean.TRUE : Boolean.FALSE;
-            case "==":
-                return (expr1 - expr2 == 0.0) ? Boolean.TRUE : Boolean.FALSE;
-            case "!=":
-                return (expr1 - expr2 != 0.0) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        return null;
-    }
-
-    @Override
     public Object visitDeclSimple(Prog_1Parser.DeclSimpleContext ctx) {
         Integer type = (Integer) visit(ctx.type());
         switch (type) {
-            case 11:
+            case Prog_1Lexer.INT:
                 Util.declaration(type, ctx.VAR().getText(), 0);
                 break;
-            case 12:
+            case Prog_1Lexer.DOUBLE:
                 Util.declaration(type, ctx.VAR().getText(), 0.0);
                 break;
         }
@@ -154,6 +128,36 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
     @Override
     public Object visitTypeDouble(Prog_1Parser.TypeDoubleContext ctx) {
         return ctx.DOUBLE().getSymbol().getType();
+    }
+
+    @Override
+    public Object visitCondOR(Prog_1Parser.CondORContext ctx) {
+        return Util.logicOperation(1, (Boolean) visit(ctx.cond()), (Boolean) visit(ctx.cdand()));
+    }
+
+    @Override
+    public Object visitCdandAnd(Prog_1Parser.CdandAndContext ctx) {
+        return Util.logicOperation(0, (Boolean) visit(ctx.cdand()), (Boolean) visit(ctx.cndts()));
+    }
+
+    @Override
+    public Object visitCndtsExpr(Prog_1Parser.CndtsExprContext ctx) {
+        return Util.getBoolean((Number) visit(ctx.expr()));
+    }
+
+    @Override
+    public Object visitCndtsRelop(Prog_1Parser.CndtsRelopContext ctx) {
+        return Util.relopOperation(ctx.RELOP().getText(), (Number) visit(ctx.e1), (Number) visit(ctx.e2));
+    }
+
+    @Override
+    public Object visitCndtsNotExpr(Prog_1Parser.CndtsNotExprContext ctx) {
+        return !Util.getBoolean((Number) visit(ctx.expr()));
+    }
+
+    @Override
+    public Object visitCndtsNotRelop(Prog_1Parser.CndtsNotRelopContext ctx) {
+        return !Util.relopOperation(ctx.RELOP().getText(), (Number) visit(ctx.e1), (Number) visit(ctx.e2));
     }
 
 }

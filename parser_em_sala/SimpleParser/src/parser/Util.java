@@ -114,9 +114,9 @@ public class Util {
 
     public static Number typeConvertion(Integer type, Number value) {
         switch (type) {
-            case 11:
+            case Prog_1Lexer.INT:
                 return value.intValue();
-            case 12:
+            case Prog_1Lexer.DOUBLE:
                 return value.doubleValue();
         }
         return null;
@@ -136,12 +136,12 @@ public class Util {
 
     public static Boolean typeMatchTest(Integer type, Number value) {
         switch (type) {
-            case 11:
+            case Prog_1Lexer.INT:
                 if (value instanceof Integer) {
                     return true;
                 }
                 return false;
-            case 12:
+            case Prog_1Lexer.DOUBLE:
                 if (value instanceof Double || value instanceof Integer) {
                     return true;
                 }
@@ -157,9 +157,41 @@ public class Util {
 
     public static Integer getTokenType(Number value) {
         if (value instanceof Integer) {
-            return 11;
+            return Prog_1Lexer.INT;
         } else if (value instanceof Double) {
-            return 12;
+            return Prog_1Lexer.DOUBLE;
+        }
+        return null;
+    }
+
+    public static Boolean logicOperation(Integer op, Boolean c1, Boolean c2) {
+        if (c1 != null && c2 != null) {
+            switch (op) {
+                case 0:
+                    return Boolean.logicalAnd(c1, c2);
+                case 1:
+                    return Boolean.logicalOr(c1, c2);
+            }
+        }
+        return null;
+    }
+    
+    public static Boolean relopOperation(String op, Number x, Number y){
+        Double expr1 = x.doubleValue();
+        Double expr2 = y.doubleValue();
+        switch (op) {
+            case ">":
+                return (expr1 - expr2 > 0.0) ? Boolean.TRUE : Boolean.FALSE;
+            case "<":
+                return (expr1 - expr2 < 0.0) ? Boolean.TRUE : Boolean.FALSE;
+            case ">=":
+                return (expr1 - expr2 >= 0.0) ? Boolean.TRUE : Boolean.FALSE;
+            case "<=":
+                return (expr1 - expr2 <= 0.0) ? Boolean.TRUE : Boolean.FALSE;
+            case "==":
+                return (expr1 - expr2 == 0.0) ? Boolean.TRUE : Boolean.FALSE;
+            case "!=":
+                return (expr1 - expr2 != 0.0) ? Boolean.TRUE : Boolean.FALSE;
         }
         return null;
     }

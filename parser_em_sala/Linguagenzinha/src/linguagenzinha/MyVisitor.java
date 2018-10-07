@@ -14,10 +14,7 @@ import parser.MiniLangParser;
  */
 public class MyVisitor extends MiniLangBaseVisitor<Object> {
 
-    @Override
-    public Object visitPrintExpr(MiniLangParser.PrintExprContext ctx) {
-        
-    }
+    
 
     
 }
