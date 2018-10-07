@@ -160,4 +160,9 @@ public class MyProgVisitor extends Prog_1BaseVisitor<Object> {
         return !Util.relopOperation(ctx.RELOP().getText(), (Number) visit(ctx.e1), (Number) visit(ctx.e2));
     }
 
+    @Override
+    public Object visitCndtsCond(Prog_1Parser.CndtsCondContext ctx) {
+        return visit(ctx.cond());
+    }
+
 }

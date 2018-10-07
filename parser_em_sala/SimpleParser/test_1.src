@@ -1,5 +1,6 @@
 int x = 10;
-if !(x == 10) then
+double y = 5.0;
+if (((x) && !(x == 10)) || (x >= y)) then
     write "sim";
 else
     write "não";

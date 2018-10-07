@@ -72,6 +72,7 @@ cndts: '(' expr ')'                         #cndtsExpr
      | '(' e1=expr RELOP e2=expr ')'        #cndtsRelop
      | '!' ('(' expr ')')                   #cndtsNotExpr
      | '!' ('(' e1=expr RELOP e2=expr ')')  #cndtsNotRelop
+     | '(' cond ')'                         #cndtsCond
      ;
 
 block: cmd                #blockSingle
